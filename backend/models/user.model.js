@@ -35,5 +35,5 @@ schema.methods.verify = async function (password) {
   return await argon2.verify(this.password, password);
 };
 
-const user = mongoose.model("User", schema);
-module.exports = user;
+const User = mongoose.model("User", schema);
+module.exports = User;
