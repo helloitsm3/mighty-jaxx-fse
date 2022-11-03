@@ -17,6 +17,10 @@ app.use(
   })
 );
 
+app.get("/healthcheck", (req, res) => {
+  res.send("Server is healthy!");
+});
+
 app.use("/auth", userRoutes);
 app.use("/product", productRoutes);
 
