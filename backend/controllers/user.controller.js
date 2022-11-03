@@ -11,9 +11,9 @@ async function create(req, res, next) {
 
 async function login(req, res, next) {
   try {
-    const { status, message } = await user.login(req.body);
+    const { status, message, token } = await user.login(req.body);
 
-    res.status(status).json({ message });
+    res.status(status).json({ message, token });
   } catch (err) {
     console.error(`Error fetching user account`, err.message);
     next(err);

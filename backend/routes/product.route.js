@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { authenticate } = require("../middlewares/auth.middleware");
 const productController = require("../controllers/product.controller");
 
-router.post("/create", productController.create);
-router.put("/:id", productController.update);
-router.delete("/:id", productController.remove);
+router.post("/create", authenticate, productController.create);
+router.put("/:id", authenticate, productController.update);
+router.delete("/:id", authenticate, productController.remove);
 
 module.exports = router;
