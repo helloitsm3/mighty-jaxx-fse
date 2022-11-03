@@ -7,6 +7,8 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 db.connect();
+db.checkConnection();
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
