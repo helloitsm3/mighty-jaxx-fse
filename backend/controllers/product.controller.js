@@ -16,7 +16,7 @@ async function get(req, res, next) {
 async function create(req, res, next) {
   try {
     if (req.files) {
-      // File upload
+      // File upload code
 
       var bodyData = new FormData();
       bodyData.append("image", req.files.file.data.toString("base64"));
