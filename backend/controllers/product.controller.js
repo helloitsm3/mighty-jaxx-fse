@@ -106,9 +106,26 @@ async function remove(req, res, next) {
   }
 }
 
+async function search(req, res, next) {
+  try {
+    const { search } = req.body;
+
+    if (search) {
+      const { status, data } = await products.search(search);
+      res.status(status).json(data);
+    } else {
+      res.json(await products.get(1, 10));
+    }
+  } catch (err) {
+    console.error(`Error searching product`, err.message);
+    next(err);
+  }
+}
+
 module.exports = {
   get,
   create,
   update,
   remove,
+  search,
 };

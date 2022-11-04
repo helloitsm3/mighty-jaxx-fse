@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useApp } from "../hooks/useApp";
 import EditModal from "../components/Modal/edit";
 import CreateModal from "../components/Modal/create";
+import Search from "../components/Search";
 
 export default function Home({ productlist }) {
   const { appState, setAppState } = useApp();
@@ -31,12 +32,7 @@ export default function Home({ productlist }) {
           Admin Dashboard
         </h1>
 
-        <div className="px-10 py-2 rounded-md my-5 md:w-1/3 w-full outline-none">
-          <input
-            placeholder="Search product..."
-            className="px-3 py-2 rounded-md w-full outline-none"
-          />
-        </div>
+        <Search />
 
         <div className="container mx-auto flex justify-center items-center py-10 text-dark-brown">
           <ProductList />

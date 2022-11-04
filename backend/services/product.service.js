@@ -50,9 +50,29 @@ async function remove(id) {
   }
 }
 
+async function search(search) {
+  try {
+    const data = await Product.find({
+      $or: [
+        { sku: { $regex: search, $options: "i" } },
+        { title: { $regex: search, $options: "i" } },
+      ],
+    }).exec();
+
+    return {
+      status: 200,
+      message: `Successfully search product`,
+      data,
+    };
+  } catch (err) {
+    return { status: 404, message: `Failed to search product` };
+  }
+}
+
 module.exports = {
   get,
   create,
   update,
   remove,
+  search,
 };
