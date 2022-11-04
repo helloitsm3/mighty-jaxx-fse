@@ -25,7 +25,7 @@ const Navbar = ({ children }) => {
           Mighty Jaxx Dashboard
         </span>
 
-        <div className="flex flex-row items-center space-x-5">
+        <div className="flex flex-row items-center md:space-x-5">
           <p className="text-dark-brown">
             {appState?.user?.email} ({appState?.user?.role})
           </p>

@@ -40,6 +40,10 @@ const EditModal = () => {
       });
   };
 
+  const handleClose = () => {
+    setAppState((prev) => ({ ...prev, isModalActive: false }));
+  };
+
   const handleInput = (e) => {
     if (e.target.name === "file") {
       setData((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
@@ -49,7 +53,7 @@ const EditModal = () => {
   };
 
   return (
-    <Modal handleConfirm={handleConfirm}>
+    <Modal handleConfirm={handleConfirm} handleClose={handleClose}>
       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left ">
         <h3
           className="text-lg font-medium leading-6 text-gray-900"

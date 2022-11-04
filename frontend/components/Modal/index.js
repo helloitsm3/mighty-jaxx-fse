@@ -1,11 +1,7 @@
 import { useApp } from "../../hooks/useApp";
 
-const Modal = ({ children, handleConfirm }) => {
-  const { appState, setAppState } = useApp();
-
-  const handleClose = () => {
-    setAppState((prev) => ({ ...prev, isModalActive: false }));
-  };
+const Modal = ({ children, handleConfirm, handleClose }) => {
+  const { appState } = useApp();
 
   return (
     <div
