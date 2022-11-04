@@ -28,7 +28,7 @@ const Navbar = ({ children }) => {
         </span>
 
         <div className="flex flex-row items-center md:space-x-5">
-          <p className="text-dark-brown">
+          <p className="text-dark-brown md:flex hidden">
             {appState?.user?.email} ({appState?.user?.role})
           </p>
 
