@@ -13,28 +13,34 @@ const CreateModal = () => {
   const { appState, setAppState } = useApp();
 
   const handleConfirm = () => {
-    setAppState((prev) => ({ ...prev, isLoading: true }));
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+    if (!data.name || !data.sku || !data.file) {
+      toast.error(
+        "Failed to create product. Please make sure you fill up all the details before submitting."
+      );
+    } else {
+      setAppState((prev) => ({ ...prev, isLoading: true }));
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
 
-    const formData = new FormData();
-    formData.append("file", data.file || appState.currentEdit.image);
-    formData.append("name", data.name || appState.currentEdit.title);
-    formData.append("sku", data.sku || appState.currentEdit.sku);
+      const formData = new FormData();
+      formData.append("file", data.file);
+      formData.append("name", data.name);
+      formData.append("sku", data.sku);
 
-    api.product
-      .create(formData, config)
-      .then(() => {
-        toast.success("Successfully created product");
-        setAppState((prev) => ({ ...prev, isLoading: false }));
-        Router.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Failed to create product. Try re-login");
-        setAppState((prev) => ({ ...prev, isLoading: false }));
-      });
+      api.product
+        .create(formData, config)
+        .then(() => {
+          toast.success("Successfully created product");
+          setAppState((prev) => ({ ...prev, isLoading: false }));
+          Router.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Failed to create product. Try re-login");
+          setAppState((prev) => ({ ...prev, isLoading: false }));
+        });
+    }
   };
 
   const handleInput = (e) => {
