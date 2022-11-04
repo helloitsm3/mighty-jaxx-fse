@@ -48,7 +48,7 @@ const ProductList = () => {
     setAppState((prev) => ({ ...prev, isCreateModalActive: true }));
   };
 
-  const RenderAction = () => {
+  const RenderAction = (doc) => {
     if (appState?.user?.role === "admin") {
       return (
         <td className="text-right text-white space-x-1">
@@ -122,7 +122,7 @@ const ProductList = () => {
                 <td>{title}</td>
                 <td className="text-right">{createdAt}</td>
                 <td className="text-right">{updatedAt}</td>
-                <RenderAction />
+                {RenderAction(doc)}
               </tr>
             );
           })}
