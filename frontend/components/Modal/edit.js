@@ -1,5 +1,7 @@
 import axios from "axios";
 import Modal from "./index";
+import Router from "next/router";
+import toast from "react-hot-toast";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useState } from "react";
@@ -8,19 +10,34 @@ import { useApp } from "../../hooks/useApp";
 const EditModal = () => {
   const [data, setData] = useState({});
   const [token, _] = useLocalStorage("user_token");
-  const { appState } = useApp();
+  const { appState, setAppState } = useApp();
 
   const handleConfirm = () => {
+    setAppState((prev) => ({ ...prev, isLoading: true }));
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
 
     const formData = new FormData();
-    formData.append("file", data.file);
-    formData.append("name", data.name);
-    formData.append("sku", data.sku);
+    formData.append("file", data.file || appState.currentEdit.image);
+    formData.append("name", data.name || appState.currentEdit.title);
+    formData.append("sku", data.sku || appState.currentEdit.sku);
 
-    axios.put(`http://localhost:3001/product/${appState.currentEdit}`, config);
+    axios
+      .put(
+        `http://localhost:3001/product/${appState.currentEdit._id}`,
+        formData,
+        config
+      )
+      .then(() => {
+        toast.success("Successfully updated product information");
+        setAppState((prev) => ({ ...prev, isLoading: false }));
+        Router.reload();
+      })
+      .catch((err) => {
+        toast.error("Failed to update product information. Try re-login");
+        setAppState((prev) => ({ ...prev, isLoading: false }));
+      });
   };
 
   const handleInput = (e) => {

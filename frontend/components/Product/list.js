@@ -48,7 +48,7 @@ const ProductList = () => {
             <tr key={index}>
               <td>{_id}</td>
               <td>
-                <img src={image} alt="product image" />
+                <img src={image} alt="product image" className="w-32" />
               </td>
               <td>{sku}</td>
               <td>{title}</td>
@@ -61,7 +61,7 @@ const ProductList = () => {
                     setAppState((prev) => ({
                       ...prev,
                       isModalActive: true,
-                      currentEdit: _id,
+                      currentEdit: doc,
                     }))
                   }
                 >

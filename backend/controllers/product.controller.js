@@ -24,27 +24,41 @@ async function create(req, res, next) {
 
 async function update(req, res, next) {
   try {
-    // File upload
-    var bodyData = new FormData();
-    bodyData.append("image", req.files.file.data.toString("base64"));
+    if (req.files) {
+      // File upload
+      var bodyData = new FormData();
+      bodyData.append("image", req.files.file.data.toString("base64"));
 
-    axios
-      .post(
-        `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.IMGBB_KEY}`,
-        bodyData
-      )
-      .then(async (response) => {
-        const image_url = response.data.data.image.url;
+      axios
+        .post(
+          `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.IMGBB_KEY}`,
+          bodyData
+        )
+        .then(async (response) => {
+          const image_url = response.data.data.image.url;
 
-        const data = {
-          image: image_url,
-          sku: req.body.sku,
-          name: req.body.name,
-        };
-        const { status, message } = await products.update(req.params.id, data);
-        res.status(status).json(message);
-      })
-      .catch(() => res.status(400).json("Failed to upload image"));
+          const data = {
+            image: image_url,
+            sku: req.body.sku,
+            name: req.body.name,
+          };
+          const { status, message } = await products.update(
+            req.params.id,
+            data
+          );
+          res.status(status).json(message);
+        })
+        .catch(() => res.status(400).json("Failed to upload image"));
+    } else {
+      // Update without uploading image
+      const data = {
+        image: req.body.file,
+        sku: req.body.sku,
+        name: req.body.name,
+      };
+      const { status, message } = await products.update(req.params.id, data);
+      res.status(status).json(message);
+    }
   } catch (err) {
     console.error(`Error updating product`, err.message);
     next(err);
