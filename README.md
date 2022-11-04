@@ -54,7 +54,8 @@ git clone with Github CLI     gh repo clone helloitsm3/mighty-jaxx-fse
 ```sh
 1. Open the project in VS Code
 2. cd frontend
-3. npm run dev
+3. npm install
+4. npm run dev
 ```
 
 4. Development (backend)
@@ -62,7 +63,8 @@ git clone with Github CLI     gh repo clone helloitsm3/mighty-jaxx-fse
 ```sh
 1. Open the project in VS Code
 2. cd backend
-3. npm run start
+3. npm install
+4. npm run start
 ```
 
 ## Setting up Environment Variables
