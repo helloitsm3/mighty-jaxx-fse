@@ -2,6 +2,7 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./services/db.service");
+const fileupload = require("express-fileupload");
 const userRoutes = require("./routes/user.route");
 const productRoutes = require("./routes/product.route");
 
@@ -16,6 +17,11 @@ app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
+  })
+);
+app.use(
+  fileupload({
+    createParentPath: true,
   })
 );
 

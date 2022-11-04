@@ -23,11 +23,11 @@ async function create(product) {
 }
 
 async function update(id, product) {
-  const { sku, title, image } = { ...product };
+  const { sku, name, image } = { ...product };
   try {
     const newProduct = await Product.findOneAndUpdate(
       { _id: id },
-      { sku, title, image }
+      { sku, title: name, image }
     );
     await newProduct.save();
 

@@ -1,11 +1,12 @@
 import axios from "axios";
+import Router from "next/router";
 import toast from "react-hot-toast";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useApp } from "../../hooks/useApp";
 
 const ProductList = () => {
-  const { appState } = useApp();
+  const { appState, setAppState } = useApp();
   const [token, _] = useLocalStorage("user_token");
   const docs = appState.productlist.docs;
 
@@ -20,7 +21,10 @@ const ProductList = () => {
 
     axios
       .delete(`http://localhost:3001/product/${id}`, config)
-      .then(() => toast.success("Successfully deleted product"))
+      .then(() => {
+        toast.success("Successfully deleted product");
+        Router.reload();
+      })
       .catch(() => toast.error("Failed to delete product. Try re-login"));
   };
 
@@ -43,13 +47,24 @@ const ProductList = () => {
           return (
             <tr key={index}>
               <td>{_id}</td>
-              <td>{image}</td>
+              <td>
+                <img src={image} alt="product image" />
+              </td>
               <td>{sku}</td>
               <td>{title}</td>
               <td className="text-right">{createdAt}</td>
               <td className="text-right">{updatedAt}</td>
               <td className="text-right text-white space-x-1">
-                <button className="bg-blue-500 px-4 py-1 rounded-md">
+                <button
+                  className="bg-blue-500 px-4 py-1 rounded-md"
+                  onClick={() =>
+                    setAppState((prev) => ({
+                      ...prev,
+                      isModalActive: true,
+                      currentEdit: _id,
+                    }))
+                  }
+                >
                   Edit
                 </button>
                 <button

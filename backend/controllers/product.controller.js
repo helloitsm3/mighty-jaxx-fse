@@ -1,4 +1,8 @@
+const fs = require("fs");
+const axios = require("axios");
+const FormData = require("form-data");
 const products = require("../services/product.service");
+require("dotenv").config();
 
 async function get(req, res, next) {
   try {
@@ -20,8 +24,27 @@ async function create(req, res, next) {
 
 async function update(req, res, next) {
   try {
-    const { status, message } = await products.update(req.params.id, req.body);
-    res.status(status).json(message);
+    // File upload
+    var bodyData = new FormData();
+    bodyData.append("image", req.files.file.data.toString("base64"));
+
+    axios
+      .post(
+        `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.IMGBB_KEY}`,
+        bodyData
+      )
+      .then(async (response) => {
+        const image_url = response.data.data.image.url;
+
+        const data = {
+          image: image_url,
+          sku: req.body.sku,
+          name: req.body.name,
+        };
+        const { status, message } = await products.update(req.params.id, data);
+        res.status(status).json(message);
+      })
+      .catch(() => res.status(400).json("Failed to upload image"));
   } catch (err) {
     console.error(`Error updating product`, err.message);
     next(err);
