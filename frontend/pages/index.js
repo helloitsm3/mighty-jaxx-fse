@@ -1,21 +1,7 @@
 import Head from "next/head";
-import useLocalStorage from "../hooks/useLocalStorage";
-
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
-  const router = useRouter();
-  const [token, _] = useLocalStorage("user_token");
-
-  useEffect(() => {
-    if (!token) {
-      router.push("/login");
-    }
-
-    console.log(token);
-  }, [token]);
-
   return (
     <div>
       <Head>
@@ -24,7 +10,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="bg-primary min-h-screen flex justify-center items-center"></main>
+      <Navbar>
+        <h1 className="text-4xl font-semibold text-dark-brown">
+          Admin Dashboard
+        </h1>
+
+        <div className="px-10 py-2 rounded-md my-5 md:w-1/3 w-full outline-none">
+          <input
+            placeholder="Search product..."
+            className="px-3 py-2 rounded-md w-full outline-none"
+          />
+        </div>
+
+        <div className="container mx-auto flex justify-center items-center py-10"></div>
+      </Navbar>
     </div>
   );
 }

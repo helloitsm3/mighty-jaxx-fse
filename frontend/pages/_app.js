@@ -1,12 +1,14 @@
+import Auth from "../components/Auth";
 import { Toaster } from "react-hot-toast";
+
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
+    <Auth>
       <Toaster />
       <Component {...pageProps} />
-    </div>
+    </Auth>
   );
 }
 
