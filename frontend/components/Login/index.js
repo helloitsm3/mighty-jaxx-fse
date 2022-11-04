@@ -1,7 +1,8 @@
-import axios from "axios";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
+import api from "../../utils/api.util";
 import useLocalStorage from "../../hooks/useLocalStorage";
+
+import { useRouter } from "next/router";
 
 const Login = () => {
   const router = useRouter();
@@ -9,11 +10,9 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/auth/login", {
-        email: e.target.email.value,
-        password: e.target.password.value,
-      })
+
+    api.user
+      .login(e.target.email.value, e.target.password.value)
       .then(function (response) {
         setToken(response.data.token);
         router.push("/");

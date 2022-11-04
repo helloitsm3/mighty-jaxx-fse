@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../utils/api.util";
 import { useApp } from "../../hooks/useApp";
 
 const Search = () => {
@@ -10,8 +10,8 @@ const Search = () => {
 
   const handleSearch = () => {
     const { search } = appState;
-    axios
-      .post(`http://localhost:3001/product/search`, { search })
+    api.product
+      .search(search)
       .then((res) => {
         let data = {};
 

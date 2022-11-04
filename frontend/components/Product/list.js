@@ -1,6 +1,7 @@
-import axios from "axios";
+import moment from "moment";
 import Router from "next/router";
 import toast from "react-hot-toast";
+import api from "../../utils/api.util";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useApp } from "../../hooks/useApp";
@@ -19,8 +20,8 @@ const ProductList = () => {
       headers: { Authorization: `Bearer ${token}` },
     };
 
-    axios
-      .delete(`http://localhost:3001/product/${id}`, config)
+    api.product
+      .remove(id, config)
       .then(() => {
         toast.success("Successfully deleted product");
         Router.reload();
@@ -29,18 +30,12 @@ const ProductList = () => {
   };
 
   const handleNextPage = async () => {
-    const productlist = await axios.get(
-      `http://localhost:3001/product/${nextPage}`
-    );
-
+    const productlist = await api.product.pagination(nextPage);
     setAppState((prev) => ({ ...prev, productlist: productlist.data }));
   };
 
   const handlePrevPage = async () => {
-    const productlist = await axios.get(
-      `http://localhost:3001/product/${prevPage}`
-    );
-
+    const productlist = await api.product.pagination(prevPage);
     setAppState((prev) => ({ ...prev, productlist: productlist.data }));
   };
 
@@ -66,7 +61,7 @@ const ProductList = () => {
           </button>
           <button
             className="bg-red-500 px-4 py-1 rounded-md"
-            onClick={() => handleRemove(_id)}
+            onClick={() => handleRemove(doc._id)}
           >
             Remove
           </button>
@@ -120,8 +115,12 @@ const ProductList = () => {
                 </td>
                 <td>{sku}</td>
                 <td>{title}</td>
-                <td className="text-right">{createdAt}</td>
-                <td className="text-right">{updatedAt}</td>
+                <td className="text-right">
+                  {moment(createdAt).format("DD-MMM-YYYY, HH:mma")}
+                </td>
+                <td className="text-right">
+                  {moment(updatedAt).format("DD-MMM-YYYY, HH:mma")}
+                </td>
                 {RenderAction(doc)}
               </tr>
             );

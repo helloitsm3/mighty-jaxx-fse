@@ -1,7 +1,7 @@
-import axios from "axios";
 import Modal from "./index";
 import Router from "next/router";
 import toast from "react-hot-toast";
+import api from "../../utils/api.util";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useState } from "react";
@@ -23,8 +23,8 @@ const CreateModal = () => {
     formData.append("name", data.name || appState.currentEdit.title);
     formData.append("sku", data.sku || appState.currentEdit.sku);
 
-    axios
-      .post(`http://localhost:3001/product/create`, formData, config)
+    api.product
+      .create(formData, config)
       .then(() => {
         toast.success("Successfully updated product information");
         setAppState((prev) => ({ ...prev, isLoading: false }));

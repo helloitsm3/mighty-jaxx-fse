@@ -10,7 +10,9 @@ const Navbar = ({ children }) => {
   const [token, _] = useLocalStorage("user_token");
 
   useEffect(() => {
-    setAppState((prev) => ({ ...prev, user: decodeJWT(token) }));
+    if (token) {
+      setAppState((prev) => ({ ...prev, user: decodeJWT(token) }));
+    }
   }, []);
 
   const handleLogout = () => {
