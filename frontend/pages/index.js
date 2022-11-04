@@ -1,5 +1,5 @@
-import axios from "axios";
 import Head from "next/head";
+import api from "../utils/api.util";
 import Navbar from "../components/Navbar";
 import ProductList from "../components/Product/list";
 
@@ -43,7 +43,7 @@ export default function Home({ productlist }) {
 }
 
 export async function getServerSideProps(context) {
-  const productlist = await axios.get("http://localhost:3001/product/1");
+  const productlist = await api.product.get();
 
   return {
     props: {
