@@ -11,10 +11,6 @@ const ProductList = () => {
   const { appState, setAppState } = useApp();
   const { hasNextPage, hasPrevPage, nextPage, prevPage } = appState.productlist;
 
-  if (appState?.productlist?.docs?.length === 0) {
-    return <div>There is currently no product</div>;
-  }
-
   const handleRemove = (id) => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -89,64 +85,70 @@ const ProductList = () => {
     <div className="w-full">
       <RenderCreateButton />
 
-      <table className="table-auto w-full">
-        <thead>
-          <tr className="text-left">
-            <th>ID</th>
-            <th>Image</th>
-            <th>SKU</th>
-            <th>Name</th>
-            <th className="text-right">Created at</th>
-            <th className="text-right">Updated at</th>
-            {appState?.user?.role === "admin" && (
-              <th className="text-right">Action</th>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {appState?.productlist?.docs?.map((doc, index) => {
-            const { _id, sku, title, image, createdAt, updatedAt } = doc;
-
-            return (
-              <tr key={index}>
-                <td>{_id}</td>
-                <td>
-                  <img src={image} alt="product image" className="w-32" />
-                </td>
-                <td>{sku}</td>
-                <td>{title}</td>
-                <td className="text-right">
-                  {moment(createdAt).format("DD-MMM-YYYY, HH:mma")}
-                </td>
-                <td className="text-right">
-                  {moment(updatedAt).format("DD-MMM-YYYY, HH:mma")}
-                </td>
-                {RenderAction(doc)}
+      {appState?.productlist?.docs?.length === 0 ? (
+        <div className="flex justify-center">There is currently no product</div>
+      ) : (
+        <div className="w-full">
+          <table className="table-auto w-full">
+            <thead>
+              <tr className="text-left">
+                <th>ID</th>
+                <th>Image</th>
+                <th>SKU</th>
+                <th>Name</th>
+                <th className="text-right">Created at</th>
+                <th className="text-right">Updated at</th>
+                {appState?.user?.role === "admin" && (
+                  <th className="text-right">Action</th>
+                )}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {appState?.productlist?.docs?.map((doc, index) => {
+                const { _id, sku, title, image, createdAt, updatedAt } = doc;
 
-      <div className="my-10 text-right space-x-5">
-        {hasPrevPage && (
-          <button
-            onClick={handlePrevPage}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-          >
-            Prev Page
-          </button>
-        )}
+                return (
+                  <tr key={index}>
+                    <td>{_id}</td>
+                    <td>
+                      <img src={image} alt="product image" className="w-32" />
+                    </td>
+                    <td>{sku}</td>
+                    <td>{title}</td>
+                    <td className="text-right">
+                      {moment(createdAt).format("DD-MMM-YYYY, HH:mma")}
+                    </td>
+                    <td className="text-right">
+                      {moment(updatedAt).format("DD-MMM-YYYY, HH:mma")}
+                    </td>
+                    {RenderAction(doc)}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
 
-        {hasNextPage && (
-          <button
-            onClick={handleNextPage}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-          >
-            Next Page
-          </button>
-        )}
-      </div>
+          <div className="my-10 text-right space-x-5">
+            {hasPrevPage && (
+              <button
+                onClick={handlePrevPage}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                Prev Page
+              </button>
+            )}
+
+            {hasNextPage && (
+              <button
+                onClick={handleNextPage}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                Next Page
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

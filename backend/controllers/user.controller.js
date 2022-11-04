@@ -2,7 +2,8 @@ const user = require("../services/user.service");
 
 async function create(req, res, next) {
   try {
-    res.json(await user.create(req.body));
+    const { status, message } = await user.create(req.body);
+    res.status(status).json({ message });
   } catch (err) {
     console.error(`Error creating user account`, err.message);
     next(err);

@@ -12,6 +12,9 @@ export default {
         email,
         password,
       }),
+
+    register: (email, password) =>
+      axios.post(`${endpoint}/auth/`, { email, password }),
   },
   product: {
     create: (formData, config) =>

@@ -5,8 +5,7 @@ async function create(user) {
   const { email, password } = { ...user };
   const newUser = new User({ email, password });
   await newUser.save();
-
-  return { message: "Successfully created user" };
+  return { status: 200, message: "Successfully created user" };
 }
 
 async function login(user) {

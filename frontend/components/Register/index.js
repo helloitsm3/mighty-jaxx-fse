@@ -1,31 +1,29 @@
 import Link from "next/link";
 import toast from "react-hot-toast";
 import api from "../../utils/api.util";
-import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useRouter } from "next/router";
 
-const Login = () => {
+const Register = () => {
   const router = useRouter();
-  const [_, setToken] = useLocalStorage("user_token");
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     api.user
-      .login(e.target.email.value, e.target.password.value)
-      .then(function (response) {
-        setToken(response.data.token);
-        router.push("/");
+      .register(e.target.email.value, e.target.password.value)
+      .then(() => {
+        toast.success("Successfully registered an account");
+        router.push("/login");
       })
-      .catch(function () {
-        toast.error("Failed to login. Invalid credentials");
+      .catch(function (err) {
+        toast.error("Failed to register an account.");
       });
   };
 
   return (
     <div className="bg-light-yellow px-10 py-5 rounded-md text-black space-y-5 2xl:w-1/5">
-      <p className="font-bold text-2xl">Login to Dashboard</p>
+      <p className="font-bold text-2xl">Register an account</p>
 
       <form className="flex flex-col space-y-8" onSubmit={handleLogin}>
         <div className="space-y-3">
@@ -57,11 +55,11 @@ const Login = () => {
             type="submit"
             className="bg-blue-500 rounded-md py-3 text-white w-full"
           >
-            Login
+            Register
           </button>
 
-          <Link href="/register">
-            <p className="mt-5">Click here to register an account</p>
+          <Link href="/login">
+            <p className="mt-5">Back to login</p>
           </Link>
         </div>
       </form>
@@ -69,4 +67,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
