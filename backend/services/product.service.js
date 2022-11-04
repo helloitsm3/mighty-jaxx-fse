@@ -1,5 +1,19 @@
 const Product = require("../models/product.model");
 
+async function get(page = 1, limit = 10) {
+  const options = {
+    page: page,
+    limit: limit,
+    collation: {
+      locale: "en",
+    },
+  };
+
+  return Product.paginate({}, options, (err, result) => {
+    return result;
+  });
+}
+
 async function create(product) {
   const { sku, title, image } = { ...product };
   const newProduct = new Product({ sku, title, image });
@@ -37,6 +51,7 @@ async function remove(id) {
 }
 
 module.exports = {
+  get,
   create,
   update,
   remove,

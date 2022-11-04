@@ -1,5 +1,14 @@
 const products = require("../services/product.service");
 
+async function get(req, res, next) {
+  try {
+    res.json(await products.get(req.params.page, 10));
+  } catch (err) {
+    console.error(`Error fetching product`, err.message);
+    next(err);
+  }
+}
+
 async function create(req, res, next) {
   try {
     res.json(await products.create(req.body));
@@ -24,12 +33,13 @@ async function remove(req, res, next) {
     const { status, message } = await products.remove(req.params.id);
     res.status(status).json(message);
   } catch (err) {
-    console.error(`Error updating product`, err.message);
+    console.error(`Error removing product`, err.message);
     next(err);
   }
 }
 
 module.exports = {
+  get,
   create,
   update,
   remove,
