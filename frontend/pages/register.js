@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Register from "../components/Register";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div>
       <Head>
@@ -17,4 +17,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

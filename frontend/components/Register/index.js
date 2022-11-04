@@ -3,20 +3,25 @@ import toast from "react-hot-toast";
 import api from "../../utils/api.util";
 
 import { useRouter } from "next/router";
+import { useApp } from "../../hooks/useApp";
 
 const Register = () => {
   const router = useRouter();
+  const { setAppState, appState } = useApp();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
+    setAppState((prev) => ({ ...prev, isLoading: true }));
     api.user
       .register(e.target.email.value, e.target.password.value)
       .then(() => {
+        setAppState((prev) => ({ ...prev, isLoading: false }));
         toast.success("Successfully registered an account");
         router.push("/login");
       })
       .catch(function (err) {
+        setAppState((prev) => ({ ...prev, isLoading: false }));
         toast.error("Failed to register an account.");
       });
   };
@@ -53,9 +58,12 @@ const Register = () => {
         <div className="w-full flex flex-col">
           <button
             type="submit"
-            className="bg-blue-500 rounded-md py-3 text-white w-full"
+            disabled={appState.isLoading}
+            className={`${
+              appState.isLoading ? "bg-gray-500" : "bg-blue-500"
+            } rounded-md py-3 text-white w-full`}
           >
-            Register
+            {appState.isLoading ? "Registering..." : "Register"}
           </button>
 
           <Link href="/login">

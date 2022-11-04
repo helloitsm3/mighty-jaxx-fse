@@ -4,21 +4,26 @@ import api from "../../utils/api.util";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useRouter } from "next/router";
+import { useApp } from "../../hooks/useApp";
 
 const Login = () => {
   const router = useRouter();
+  const { setAppState, appState } = useApp();
   const [_, setToken] = useLocalStorage("user_token");
 
   const handleLogin = (e) => {
     e.preventDefault();
 
+    setAppState((prev) => ({ ...prev, isLoading: true }));
     api.user
       .login(e.target.email.value, e.target.password.value)
       .then(function (response) {
+        setAppState((prev) => ({ ...prev, isLoading: false }));
         setToken(response.data.token);
         router.push("/");
       })
       .catch(function () {
+        setAppState((prev) => ({ ...prev, isLoading: false }));
         toast.error("Failed to login. Invalid credentials");
       });
   };
@@ -55,9 +60,12 @@ const Login = () => {
         <div className="w-full flex flex-col">
           <button
             type="submit"
-            className="bg-blue-500 rounded-md py-3 text-white w-full"
+            disabled={appState.isLoading}
+            className={`${
+              appState.isLoading ? "bg-gray-500" : "bg-blue-500"
+            } rounded-md py-3 text-white w-full`}
           >
-            Login
+            {appState.isLoading ? "Loading..." : "Login"}
           </button>
 
           <Link href="/register">
