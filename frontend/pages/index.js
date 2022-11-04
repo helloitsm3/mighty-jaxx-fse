@@ -1,7 +1,17 @@
+import axios from "axios";
 import Head from "next/head";
+import { useEffect } from "react";
+import { useApp } from "../hooks/useApp";
 import Navbar from "../components/Navbar";
+import ProductList from "../components/Product/list";
 
-export default function Home() {
+export default function Home({ productlist }) {
+  const { setAppState } = useApp();
+
+  useEffect(() => {
+    setAppState((prev) => ({ ...prev, productlist }));
+  }, [productlist]);
+
   return (
     <div>
       <Head>
@@ -22,8 +32,20 @@ export default function Home() {
           />
         </div>
 
-        <div className="container mx-auto flex justify-center items-center py-10"></div>
+        <div className="container mx-auto flex justify-center items-center py-10 text-dark-brown">
+          <ProductList />
+        </div>
       </Navbar>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const productlist = await axios.get("http://localhost:3001/product/1");
+
+  return {
+    props: {
+      productlist: productlist.data,
+    }, // will be passed to the page component as props
+  };
 }
