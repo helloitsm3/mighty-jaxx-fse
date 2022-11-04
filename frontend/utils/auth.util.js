@@ -8,8 +8,12 @@ export function decodeJWT(token) {
 export function isJWTValid(token) {
   if (!token) return false;
 
-  return jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-    if (err) return false;
-    return user;
-  });
+  return jwt.verify(
+    token,
+    process.env.NEXT_PUBLIC_TOKEN_SECRET,
+    (err, user) => {
+      if (err) return false;
+      return user;
+    }
+  );
 }
