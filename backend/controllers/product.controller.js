@@ -20,6 +20,7 @@ async function create(req, res, next) {
 
       var bodyData = new FormData();
       bodyData.append("image", req.files.file.data.toString("base64"));
+      bodyData.append("expiration", "15552000");
 
       axios
         .post(

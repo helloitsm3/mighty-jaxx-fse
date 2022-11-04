@@ -5,6 +5,7 @@ import api from "../../utils/api.util";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useApp } from "../../hooks/useApp";
+import MobileView from "./mobile";
 
 const ProductList = () => {
   const [token, _] = useLocalStorage("user_token");
@@ -69,7 +70,7 @@ const ProductList = () => {
   const RenderCreateButton = () => {
     if (appState?.user?.role === "admin") {
       return (
-        <div className="my-5 text-right space-x-5">
+        <div className="md:my-5 text-right space-x-5">
           <button
             onClick={handleCreateModal}
             className="bg-blue-500 text-white px-4 py-2 rounded-md"
@@ -82,14 +83,14 @@ const ProductList = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full px-5">
       <RenderCreateButton />
 
       {appState?.productlist?.docs?.length === 0 ? (
         <div className="flex justify-center">There is currently no product</div>
       ) : (
         <div className="w-full">
-          <table className="table-auto w-full">
+          <table className="hidden md:table table-auto w-full">
             <thead>
               <tr className="text-left">
                 <th>ID</th>
@@ -127,6 +128,8 @@ const ProductList = () => {
               })}
             </tbody>
           </table>
+
+          <MobileView />
 
           <div className="my-10 text-right space-x-5">
             {hasPrevPage && (
