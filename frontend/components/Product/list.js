@@ -44,8 +44,21 @@ const ProductList = () => {
     setAppState((prev) => ({ ...prev, productlist: productlist.data }));
   };
 
+  const handleCreateModal = () => {
+    setAppState((prev) => ({ ...prev, isCreateModalActive: true }));
+  };
+
   return (
     <div className="w-full">
+      <div className="my-5 text-right space-x-5">
+        <button
+          onClick={handleCreateModal}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+        >
+          Create product
+        </button>
+      </div>
+
       <table className="table-auto w-full">
         <thead>
           <tr className="text-left">

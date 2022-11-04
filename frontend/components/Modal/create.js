@@ -7,7 +7,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { useState } from "react";
 import { useApp } from "../../hooks/useApp";
 
-const EditModal = () => {
+const CreateModal = () => {
   const [data, setData] = useState({});
   const [token, _] = useLocalStorage("user_token");
   const { appState, setAppState } = useApp();
@@ -24,17 +24,14 @@ const EditModal = () => {
     formData.append("sku", data.sku || appState.currentEdit.sku);
 
     axios
-      .put(
-        `http://localhost:3001/product/${appState.currentEdit._id}`,
-        formData,
-        config
-      )
+      .post(`http://localhost:3001/product/create`, formData, config)
       .then(() => {
         toast.success("Successfully updated product information");
         setAppState((prev) => ({ ...prev, isLoading: false }));
         Router.reload();
       })
       .catch((err) => {
+        console.log(err);
         toast.error("Failed to update product information. Try re-login");
         setAppState((prev) => ({ ...prev, isLoading: false }));
       });
@@ -55,7 +52,7 @@ const EditModal = () => {
           className="text-lg font-medium leading-6 text-gray-900"
           id="modal-title"
         >
-          Edit product information
+          Create product
         </h3>
 
         <div className="mt-5 text-black space-y-4">
@@ -89,4 +86,4 @@ const EditModal = () => {
   );
 };
 
-export default EditModal;
+export default CreateModal;

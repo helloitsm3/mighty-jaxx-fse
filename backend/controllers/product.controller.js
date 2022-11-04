@@ -15,7 +15,38 @@ async function get(req, res, next) {
 
 async function create(req, res, next) {
   try {
-    res.json(await products.create(req.body));
+    if (req.files) {
+      // File upload
+
+      var bodyData = new FormData();
+      bodyData.append("image", req.files.file.data.toString("base64"));
+
+      axios
+        .post(
+          `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.IMGBB_KEY}`,
+          bodyData
+        )
+        .then(async (response) => {
+          const image_url = response.data.data.image.url;
+
+          const data = {
+            image: image_url,
+            sku: req.body.sku,
+            name: req.body.name,
+          };
+          const { status, message } = await products.create(data);
+          res.status(status).json(message);
+        })
+        .catch((err) => {
+          res.status(400).json("Failed to upload image");
+        });
+    } else {
+      console.error(
+        `Error creating product. Image is not provided`,
+        err.message
+      );
+      next(err);
+    }
   } catch (err) {
     console.error(`Error creating product`, err.message);
     next(err);

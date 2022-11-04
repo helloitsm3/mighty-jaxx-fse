@@ -15,11 +15,11 @@ async function get(page = 1, limit = 10) {
 }
 
 async function create(product) {
-  const { sku, title, image } = { ...product };
-  const newProduct = new Product({ sku, title, image });
+  const { sku, name, image } = { ...product };
+  const newProduct = new Product({ sku, title: name, image });
   await newProduct.save();
 
-  return { message: "Successfully created product" };
+  return { status: 200, message: "Successfully created product" };
 }
 
 async function update(id, product) {

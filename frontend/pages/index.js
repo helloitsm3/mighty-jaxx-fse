@@ -6,6 +6,7 @@ import ProductList from "../components/Product/list";
 import { useEffect } from "react";
 import { useApp } from "../hooks/useApp";
 import EditModal from "../components/Modal/edit";
+import CreateModal from "../components/Modal/create";
 
 export default function Home({ productlist }) {
   const { appState, setAppState } = useApp();
@@ -23,6 +24,7 @@ export default function Home({ productlist }) {
       </Head>
 
       {appState.isModalActive && <EditModal />}
+      {appState.isCreateModalActive && <CreateModal />}
 
       <Navbar>
         <h1 className="text-4xl font-semibold text-dark-brown">
