@@ -26,13 +26,13 @@ const CreateModal = () => {
     api.product
       .create(formData, config)
       .then(() => {
-        toast.success("Successfully updated product information");
+        toast.success("Successfully created product");
         setAppState((prev) => ({ ...prev, isLoading: false }));
         Router.reload();
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Failed to update product information. Try re-login");
+        toast.error("Failed to create product. Try re-login");
         setAppState((prev) => ({ ...prev, isLoading: false }));
       });
   };

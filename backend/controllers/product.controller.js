@@ -38,6 +38,7 @@ async function create(req, res, next) {
           res.status(status).json(message);
         })
         .catch((err) => {
+          console.log(err);
           res.status(400).json("Failed to upload image");
         });
     } else {
