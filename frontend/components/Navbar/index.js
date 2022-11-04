@@ -1,7 +1,17 @@
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useApp } from "../../hooks/useApp";
+import { decodeJWT } from "../../utils/auth.util";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Navbar = ({ children }) => {
   const router = useRouter();
+  const { appState, setAppState } = useApp();
+  const [token, _] = useLocalStorage("user_token");
+
+  useEffect(() => {
+    setAppState((prev) => ({ ...prev, user: decodeJWT(token) }));
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user_token");
@@ -15,12 +25,18 @@ const Navbar = ({ children }) => {
           Mighty Jaxx Dashboard
         </span>
 
-        <button
-          className="bg-red-500 px-3 py-1 rounded-md"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+        <div className="flex flex-row items-center space-x-5">
+          <p className="text-dark-brown">
+            {appState?.user?.email} ({appState?.user?.role})
+          </p>
+
+          <button
+            className="bg-red-500 px-3 py-1 rounded-md"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
       </nav>
 
       <main className="flex justify-center items-center py-10 flex-col">

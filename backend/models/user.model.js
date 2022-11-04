@@ -13,6 +13,7 @@ const schema = new mongoose.Schema(
     role: {
       type: String,
       default: "user",
+      lowercase: true,
     },
     password: {
       type: String,

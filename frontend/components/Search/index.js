@@ -1,11 +1,8 @@
 import axios from "axios";
-import useLocalStorage from "../../hooks/useLocalStorage";
-
 import { useApp } from "../../hooks/useApp";
 
 const Search = () => {
   const { appState, setAppState } = useApp();
-  const [token, _] = useLocalStorage("user_token");
 
   const handleChange = (e) => {
     setAppState((prev) => ({ ...prev, search: e.target.value }));
@@ -13,12 +10,8 @@ const Search = () => {
 
   const handleSearch = () => {
     const { search } = appState;
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
     axios
-      .post(`http://localhost:3001/product/search`, { search }, config)
+      .post(`http://localhost:3001/product/search`, { search })
       .then((res) => {
         let data = {};
 

@@ -48,16 +48,51 @@ const ProductList = () => {
     setAppState((prev) => ({ ...prev, isCreateModalActive: true }));
   };
 
+  const RenderAction = () => {
+    if (appState?.user?.role === "admin") {
+      return (
+        <td className="text-right text-white space-x-1">
+          <button
+            className="bg-blue-500 px-4 py-1 rounded-md"
+            onClick={() =>
+              setAppState((prev) => ({
+                ...prev,
+                isModalActive: true,
+                currentEdit: doc,
+              }))
+            }
+          >
+            Edit
+          </button>
+          <button
+            className="bg-red-500 px-4 py-1 rounded-md"
+            onClick={() => handleRemove(_id)}
+          >
+            Remove
+          </button>
+        </td>
+      );
+    }
+  };
+
+  const RenderCreateButton = () => {
+    if (appState?.user?.role === "admin") {
+      return (
+        <div className="my-5 text-right space-x-5">
+          <button
+            onClick={handleCreateModal}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          >
+            Create product
+          </button>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="w-full">
-      <div className="my-5 text-right space-x-5">
-        <button
-          onClick={handleCreateModal}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
-        >
-          Create product
-        </button>
-      </div>
+      <RenderCreateButton />
 
       <table className="table-auto w-full">
         <thead>
@@ -68,7 +103,9 @@ const ProductList = () => {
             <th>Name</th>
             <th className="text-right">Created at</th>
             <th className="text-right">Updated at</th>
-            <th className="text-right">Action</th>
+            {appState?.user?.role === "admin" && (
+              <th className="text-right">Action</th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -85,26 +122,7 @@ const ProductList = () => {
                 <td>{title}</td>
                 <td className="text-right">{createdAt}</td>
                 <td className="text-right">{updatedAt}</td>
-                <td className="text-right text-white space-x-1">
-                  <button
-                    className="bg-blue-500 px-4 py-1 rounded-md"
-                    onClick={() =>
-                      setAppState((prev) => ({
-                        ...prev,
-                        isModalActive: true,
-                        currentEdit: doc,
-                      }))
-                    }
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="bg-red-500 px-4 py-1 rounded-md"
-                    onClick={() => handleRemove(_id)}
-                  >
-                    Remove
-                  </button>
-                </td>
+                <RenderAction />
               </tr>
             );
           })}
