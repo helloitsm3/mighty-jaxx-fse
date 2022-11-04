@@ -1,9 +1,10 @@
 import axios from "axios";
 import Head from "next/head";
-import { useEffect } from "react";
-import { useApp } from "../hooks/useApp";
 import Navbar from "../components/Navbar";
 import ProductList from "../components/Product/list";
+
+import { useEffect } from "react";
+import { useApp } from "../hooks/useApp";
 
 export default function Home({ productlist }) {
   const { setAppState } = useApp();
