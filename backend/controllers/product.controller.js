@@ -63,7 +63,7 @@ async function update(req, res, next) {
 
       axios
         .post(
-          `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.IMGBB_KEY}`,
+          `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_KEY}`,
           bodyData
         )
         .then(async (response) => {
