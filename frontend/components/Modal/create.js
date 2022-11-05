@@ -76,7 +76,7 @@ const CreateModal = () => {
             <input
               placeholder="SKU..."
               name="sku"
-              className="px-2 py-1 rounded-md text-white"
+              className="px-2 py-1 rounded-md text-white bg-black"
               onChange={handleInput}
             />
           </div>
@@ -86,7 +86,7 @@ const CreateModal = () => {
             <input
               placeholder="Name..."
               name="name"
-              className="px-2 py-1 rounded-md text-white"
+              className="px-2 py-1 rounded-md text-white bg-black"
               onChange={handleInput}
             />
           </div>

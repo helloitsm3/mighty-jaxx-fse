@@ -14,8 +14,12 @@ const MobileView = () => {
             <img src={image} className="rounded-md object-cover h-48" />
 
             <div className="px-5 py-3">
-              <p className="font-bold text-xl">Name: {title}</p>
+              <p>ID: {_id}</p>
+              <p className="font-bold text-xl mt-3">Name: {title}</p>
               <p>SKU: {sku}</p>
+              <p>
+                Created at: {moment(createdAt).format("DD-MMM-YYYY, HH:mma")}
+              </p>
               <p>
                 Last Updated: {moment(updatedAt).format("DD-MMM-YYYY, HH:mma")}
               </p>

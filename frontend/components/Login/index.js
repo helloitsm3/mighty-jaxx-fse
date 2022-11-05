@@ -37,7 +37,7 @@ const Login = () => {
           <div className="flex justify-between w-full space-x-14 items-center">
             <label htmlFor="email">Email</label>
             <input
-              className="py-1 px-3 rounded-md text-white"
+              className="py-1 px-3 rounded-md text-white bg-black"
               type="email"
               placeholder="Enter email"
               name="email"
@@ -48,7 +48,7 @@ const Login = () => {
           <div className="flex justify-between w-full items-center">
             <label htmlFor="password">Password</label>
             <input
-              className="py-1 px-3 rounded-md text-white"
+              className="py-1 px-3 rounded-md text-white bg-black"
               type="password"
               placeholder="Enter Password"
               name="password"

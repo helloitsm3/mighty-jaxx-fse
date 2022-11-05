@@ -38,7 +38,7 @@ const Search = () => {
     <div className="px-10 py-2 rounded-md my-5 md:w-1/3 w-full outline-none flex flex-row space-x-5">
       <input
         placeholder="Search product..."
-        className="px-3 py-2 rounded-md w-full outline-none"
+        className="px-3 py-2 rounded-md w-full outline-none bg-black"
         onChange={handleChange}
       />
 
