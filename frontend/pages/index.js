@@ -1,20 +1,30 @@
 import Head from "next/head";
 import api from "../utils/api.util";
+import Search from "../components/Search";
 import Navbar from "../components/Navbar";
+import EditModal from "../components/Modal/edit";
 import ProductList from "../components/Product/list";
+import CreateModal from "../components/Modal/create";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 import { useEffect } from "react";
 import { useApp } from "../hooks/useApp";
-import EditModal from "../components/Modal/edit";
-import CreateModal from "../components/Modal/create";
-import Search from "../components/Search";
+import { isJWTValid } from "../utils/auth.util";
 
-export default function Home({ productlist }) {
+export default function Home() {
   const { appState, setAppState } = useApp();
+  const [token, _] = useLocalStorage("user_token");
 
   useEffect(() => {
-    setAppState((prev) => ({ ...prev, productlist }));
-  }, [productlist]);
+    fetchProductList();
+  }, [token]);
+
+  const fetchProductList = async () => {
+    if (isJWTValid(token)) {
+      const productlist = await api.product.get();
+      setAppState((prev) => ({ ...prev, productlist: productlist.data }));
+    }
+  };
 
   return (
     <div>
@@ -40,14 +50,4 @@ export default function Home({ productlist }) {
       </Navbar>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const productlist = await api.product.get();
-
-  return {
-    props: {
-      productlist: productlist.data,
-    },
-  };
 }

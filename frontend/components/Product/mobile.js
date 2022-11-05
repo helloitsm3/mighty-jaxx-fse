@@ -10,7 +10,7 @@ const MobileView = () => {
         const { _id, sku, title, image, createdAt, updatedAt } = doc;
 
         return (
-          <div className="bg-white my-3 rounded-md flex flex-col">
+          <div className="bg-white my-3 rounded-md flex flex-col" key={index}>
             <img src={image} className="rounded-md object-cover h-48" />
 
             <div className="px-5 py-3">
