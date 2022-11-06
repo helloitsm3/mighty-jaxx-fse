@@ -44,7 +44,7 @@ export default function Home() {
 
         <Search />
 
-        <div className="container mx-auto flex justify-center items-center py-10 text-dark-brown">
+        <div className="flex justify-center items-center py-10 text-dark-brown">
           <ProductList />
         </div>
       </Navbar>

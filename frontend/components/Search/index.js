@@ -8,7 +8,8 @@ const Search = () => {
     setAppState((prev) => ({ ...prev, search: e.target.value }));
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     const { search } = appState;
     api.product
       .search(search)
@@ -35,7 +36,10 @@ const Search = () => {
   };
 
   return (
-    <div className="px-10 py-2 rounded-md my-5 md:w-1/3 w-full outline-none flex flex-row space-x-5">
+    <form
+      onSubmit={handleSearch}
+      className="px-10 py-2 rounded-md my-5 md:w-1/3 w-full outline-none flex flex-row space-x-5"
+    >
       <input
         placeholder="Search product..."
         className="px-3 py-2 rounded-md w-full outline-none bg-black"
@@ -43,7 +47,7 @@ const Search = () => {
       />
 
       <button
-        onClick={handleSearch}
+        type="submit"
         disabled={appState.isLoading}
         className={`${
           appState.isLoading ? "bg-gray-500" : "bg-blue-500"
@@ -51,7 +55,7 @@ const Search = () => {
       >
         {appState.isLoading ? "Searching..." : "Search"}
       </button>
-    </div>
+    </form>
   );
 };
 

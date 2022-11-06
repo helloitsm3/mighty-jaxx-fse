@@ -31,6 +31,7 @@ const EditModal = () => {
         Router.reload();
       })
       .catch((err) => {
+        console.log(err);
         toast.error("Failed to update product information. Try re-login");
         setAppState((prev) => ({ ...prev, isLoading: false }));
       });
