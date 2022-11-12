@@ -21,7 +21,7 @@ const Navbar = ({ children }) => {
   };
 
   return (
-    <div className="bg-primary min-h-screen">
+    <div className="bg-gradient-texture min-h-screen">
       <nav className="px-5 py-3 flex justify-between items-center">
         <span className="text-xl font-bold text-dark-brown">
           Mighty Jaxx Dashboard

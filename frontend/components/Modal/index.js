@@ -14,7 +14,7 @@ const Modal = ({ children, handleConfirm, handleClose }) => {
 
       <div className="fixed inset-0 z-10 overflow-y-auto">
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+          <div className="relative transform overflow-hidden rounded-lg card-bg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">{children}</div>
             </div>
@@ -24,15 +24,15 @@ const Modal = ({ children, handleConfirm, handleClose }) => {
                 onClick={handleConfirm}
                 disabled={appState.isLoading}
                 className={`inline-flex w-full justify-center rounded-md border border-transparent ${
-                  appState.isloading ? "bg-gray-500" : "bg-green-600"
-                } px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
+                  appState.isloading ? "bg-gray-500" : "bg-black"
+                } px-4 py-2 text-base font-medium text-mighty-yellow shadow-sm hover:bg-gray-800 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm`}
               >
                 {appState.isLoading ? "Loading..." : "Confirm"}
               </button>
               <button
                 type="button"
                 onClick={handleClose}
-                className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Cancel
               </button>

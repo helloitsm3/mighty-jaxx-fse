@@ -1,4 +1,4 @@
-import DesktopView from "./desktop";
+import CardView from "./cards";
 import api from "../../utils/api.util";
 
 import { useApp } from "../../hooks/useApp";
@@ -27,7 +27,7 @@ const ProductList = () => {
         <div className="md:my-5 text-right space-x-5">
           <button
             onClick={handleCreateModal}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            className="bg-black text-mighty-yellow font-bold px-4 py-2 rounded-md"
           >
             Create product
           </button>
@@ -46,13 +46,13 @@ const ProductList = () => {
         <div className="flex justify-center">There is currently no product</div>
       ) : (
         <div className="w-full">
-          <DesktopView />
+          <CardView />
 
           <div className="my-10 text-right space-x-5 container mx-auto">
             {hasPrevPage && (
               <button
                 onClick={handlePrevPage}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                className="bg-black text-mighty-yellow px-4 py-2 rounded-md"
               >
                 Prev Page
               </button>
@@ -61,7 +61,7 @@ const ProductList = () => {
             {hasNextPage && (
               <button
                 onClick={handleNextPage}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                className="bg-black text-mighty-yellow px-4 py-2 rounded-md"
               >
                 Next Page
               </button>

@@ -6,7 +6,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { useApp } from "../../hooks/useApp";
 
-const DesktopView = () => {
+const CardView = () => {
   const { appState, setAppState } = useApp();
   const [token, _] = useLocalStorage("user_token");
 
@@ -31,7 +31,7 @@ const DesktopView = () => {
       return (
         <div className="flex flex-row space-x-3 mt-5">
           <button
-            className="bg-primary px-4 py-2 rounded-md w-full"
+            className="bg-black text-mighty-yellow font-bold text-lg px-4 py-2 rounded-md w-full"
             onClick={() =>
               setAppState((prev) => ({
                 ...prev,
@@ -43,7 +43,7 @@ const DesktopView = () => {
             Edit
           </button>
           <button
-            className="bg-red-500 px-4 py-2 rounded-md w-full"
+            className="bg-red-500 text-white font-bold text-lg px-4 py-2 rounded-md w-full"
             onClick={() => handleRemove(doc._id)}
           >
             Remove
@@ -54,13 +54,13 @@ const DesktopView = () => {
   };
 
   return (
-    <div className="flex flex-wrap flex-row justify-center">
+    <div className="flex flex-wrap flex-row justify-center mt-5">
       {appState?.productlist?.docs?.map((doc, index) => {
         const { _id, sku, title, image, createdAt, updatedAt } = doc;
 
         return (
           <div
-            className="bg-white my-3 rounded-md flex flex-col mr-5 md:w-fit w-full"
+            className="bg-white my-3 rounded-lg flex flex-col mr-5 md:w-fit w-full card-bg"
             key={index}
           >
             <img
@@ -88,4 +88,4 @@ const DesktopView = () => {
   );
 };
 
-export default DesktopView;
+export default CardView;

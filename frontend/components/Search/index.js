@@ -50,8 +50,8 @@ const Search = () => {
         type="submit"
         disabled={appState.isLoading}
         className={`${
-          appState.isLoading ? "bg-gray-500" : "bg-blue-500"
-        } px-5 rounded-md`}
+          appState.isLoading ? "bg-gray-500" : "bg-black"
+        } px-5 rounded-md text-mighty-yellow font-bold text-lg hover:bg-gray-800`}
       >
         {appState.isLoading ? "Searching..." : "Search"}
       </button>
