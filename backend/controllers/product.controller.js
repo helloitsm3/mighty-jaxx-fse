@@ -39,14 +39,11 @@ async function create(req, res, next) {
         })
         .catch((err) => {
           console.log(err);
-          res.status(400).json("Failed to upload image");
+          res.status(400).json({ message: "Failed to upload image" });
         });
     } else {
-      console.error(
-        `Error creating product. Image is not provided`,
-        err.message
-      );
-      next(err);
+      console.error(`Error creating product. Image is not provided`);
+      res.status(404).json({ message: "Image file not found" });
     }
   } catch (err) {
     console.error(`Error creating product`, err.message);
