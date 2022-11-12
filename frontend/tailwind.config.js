@@ -7,10 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "gradient-texture": "url('/polkadot-bg.svg')",
+      },
       colors: {
         primary: "#CFB997",
         "light-yellow": "#F6F6C9",
         "dark-brown": "#182747",
+        "mighty-yellow": "#FFED1E",
       },
     },
   },

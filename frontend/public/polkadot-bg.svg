@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{fill:#FDD330;}
+	.st2{fill:#FDD849;}
+	.st3{fill:url(#Polkadot_2);}
+</style>
+<pattern  width="143.5" height="79" patternUnits="userSpaceOnUse" id="Polkadot_2" viewBox="14.5 -93.5 143.5 79" style="overflow:visible;">
+	<g>
+		<rect x="14.5" y="-93.5" class="st0" width="143.5" height="79"/>
+		<circle class="st1" cx="158" cy="-14.5" r="14.5"/>
+		<circle class="st1" cx="14.5" cy="-14.5" r="14.5"/>
+		<circle class="st1" cx="158" cy="-93.5" r="14.5"/>
+		<circle class="st1" cx="86.25" cy="-54" r="14.5"/>
+		<circle class="st1" cx="14.5" cy="-93.5" r="14.5"/>
+	</g>
+</pattern>
+<rect x="-1" class="st2" width="1921" height="1080"/>
+<rect x="-1" class="st3" width="1921" height="1080"/>
+</svg>

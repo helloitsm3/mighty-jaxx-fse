@@ -10,7 +10,7 @@ const LoginPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="bg-primary min-h-screen flex justify-center items-center">
+      <main className="bg-gradient-texture min-h-screen flex justify-center items-center">
         <Login />
       </main>
     </div>

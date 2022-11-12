@@ -28,3 +28,8 @@ a {
     background: black;
   }
 }
+
+.card-bg {
+  border: 2px solid black;
+  box-shadow: black 8px 8px 0px 0px;
+}
