@@ -1,7 +1,7 @@
 <div>
   <div align="center">
     <h1 style="font-weight: bold">Mighty Jaxx Dashboard</h1>
-    <img src="./resources/1.png" />
+    <img src="./resources/1.png" width="800"/>
     <br />
     <p align="center">
     This repository was created to participate in the coding challenge for Full Stack Engineer position. You can find out more details about the challenge <a href="https://github.com/Mighty-Jaxx-International-Pte-Ltd/Coding-Challenge-for-Full-Stack-Engineers">here</a>.  
