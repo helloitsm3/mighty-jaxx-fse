@@ -27,7 +27,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-light-yellow px-10 py-5 rounded-md text-black space-y-5 2xl:w-1/5">
+    <div className="bg-white px-10 py-5 rounded-lg text-black space-y-5 2xl:w-1/5 card-bg">
       <p className="font-bold text-2xl">Register an account</p>
 
       <form className="flex flex-col space-y-8" onSubmit={handleLogin}>
@@ -60,14 +60,14 @@ const Register = () => {
             type="submit"
             disabled={appState.isLoading}
             className={`${
-              appState.isLoading ? "bg-gray-500" : "bg-blue-500"
-            } rounded-md py-3 text-white w-full`}
+              appState.isLoading ? "bg-gray-500" : "bg-black"
+            } rounded-md py-2 w-full text-mighty-yellow font-bold text-lg hover:bg-gray-800`}
           >
             {appState.isLoading ? "Registering..." : "Register"}
           </button>
 
           <Link href="/login">
-            <p className="mt-5">Back to login</p>
+            <p className="mt-3">Back to login</p>
           </Link>
         </div>
       </form>
